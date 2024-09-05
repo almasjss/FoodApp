@@ -1,16 +1,16 @@
 package com.example.foodapp.model;
 
 public class Ingredient {
-    private int quantity;
     private String name;
     private String unit;
+    private int quantity;
     private int imageResourceId;
 
-    public Ingredient(int quantity, String name, String unit, int imageResourceId) {
-        this.quantity = quantity;
+    public Ingredient(int quantity, String name, String unit) {
         this.name = name;
         this.unit = unit;
-        this.imageResourceId = imageResourceId;
+        this.quantity = quantity;
+//        this.imageResourceId = imageResourceId;
     }
 
     public int getQuantity() {
