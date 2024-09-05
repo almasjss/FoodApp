@@ -1,5 +1,6 @@
 package com.example.foodapp;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -9,6 +10,8 @@ import android.widget.SimpleCursorAdapter;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.foodapp.helper.DatabaseHelper;
+import com.example.foodapp.model.Ingredient;
+import com.example.foodapp.model.Recipe;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,4 +50,21 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(simpleCursorAdapter);
 
     }
+    public void saveRecipe(Recipe recipe){
+        SQLiteDatabase db = databaseHelper.getWritableDatabase();
+
+        ContentValues recipeValues = new ContentValues();
+        recipeValues.put("recipe_name",recipe.getTitle());
+        long recipeId = db.insert("recipes",null,recipeValues);
+
+        for (Ingredient ingredient: recipe.getIngredients()){
+            ContentValues ingredientValues = new ContentValues();
+            ingredientValues.put("recipe_id",recipeId);
+            ingredientValues.put("name",ingredient.getName());
+            ingredientValues.put("quantity",ingredient.getQuantity());
+            ingredientValues.put("unit",ingredient.getUnit());
+            db.insert("ingredients",null,ingredientValues);
+        }
+    }
+
 }

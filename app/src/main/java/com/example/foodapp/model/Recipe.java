@@ -3,12 +3,20 @@ package com.example.foodapp.model;
 import java.util.List;
 
 public class Recipe {
-    private String title;
+    public String title;
     private List<Ingredient> ingredientList;
 
     public Recipe(String title, List<Ingredient> ingredientList) {
         this.title = title;
         this.ingredientList = ingredientList;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public void addIngredient(Ingredient ingredient){
